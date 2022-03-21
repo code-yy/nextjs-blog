@@ -45,7 +45,7 @@ export function getSortedPostsData(): Omit<Post, "contentHtml">[] {
   });
 }
 
-export function getAllPostIds() {
+export function getAllPostIds(): { params: Pick<Post, "id"> }[] {
   const fileNames = fs.readdirSync(postsDirectory);
   return fileNames.map((fileName) => {
     return {
@@ -56,7 +56,7 @@ export function getAllPostIds() {
   });
 }
 
-export async function getPostData(id: string) {
+export async function getPostData(id: string): Promise<Post> {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, "utf8");
 
